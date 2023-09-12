@@ -1,0 +1,1 @@
+export const envApi = 'https://64eac115bf99bdcc8e67ae0c.mockapi.io/api/v1/getInfo';
