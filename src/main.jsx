@@ -8,7 +8,7 @@ import "./index.css";
 import Root, {
   loader as rootLoader, action as rootAction,
 } from "./routes/root";
-import ErrorPage from "./error-page";
+import ErrorPage from "../src/routes/error-page";
 import Contact, { loader as contactLoader } from "./routes/contact";
 
 import { action as editAction } from "./routes/edit"
@@ -19,8 +19,8 @@ import { action as destroyAction } from './routes/destroy';
 import Index from "./routes";
 
 // data res
-import DataRes from "./component/routes/dataRes";
-import DataEditComponent from "./component/routes/dataEdit";
+import DataRes from "../src/components/routes/dataRes";
+import DataEditComponent from "../src/components/routes/dataEdit";
 
 import RegisterAndLogin from './auth/RegisterAndLogin';
 import RequireAuth from './auth/RequireAuth';
@@ -64,10 +64,6 @@ const router = createBrowserRouter([
     ],
 
   },
-  // {
-  //   path: "contacts/:contactId",
-  //   element: <Contact />,
-  // },
   {
     path: "/login",
     element: <RegisterAndLogin />

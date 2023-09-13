@@ -7,6 +7,7 @@ import { useAuth } from "../main";
 
 export default function RequireAuth({ children }) {
     let auth = useAuth();
+    //context api lấy ra state
     let location = useLocation();
     if (!auth.user) {
         // Redirect them to the /login page, but save the current location they were
@@ -15,6 +16,6 @@ export default function RequireAuth({ children }) {
         // than dropping them off on the home page.
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
-
+    //trả về root ở đây
     return children;
 }
