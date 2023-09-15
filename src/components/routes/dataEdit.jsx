@@ -66,7 +66,7 @@ export default function DataEditComponent() {
                 navigate('/data');
             }, 1500);
         })
-        .catch(err => console.log(err, 'opp'));
+            .catch(err => console.log(err, 'opp'));
 
         // return redirect('/data');
 

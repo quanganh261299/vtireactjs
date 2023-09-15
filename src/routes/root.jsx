@@ -3,7 +3,7 @@ import { createContact, getContacts } from "../contacts";
 
 //import antd
 import React, { useMemo } from 'react';
-
+import { useAuth } from '../main';
 
 export async function loader() {
   const contacts = await getContacts();
@@ -16,14 +16,13 @@ export async function action() {
   // return {contact};
 }
 
-  //khởi tạo giá trị lưu giữ context name ban đầu
-  //nơi lưu trữ ngoài root khởi tạo
-  export const Context = React.createContext(null);
+//khởi tạo giá trị lưu giữ context name ban đầu
+//nơi lưu trữ ngoài root khởi tạo
+export const Context = React.createContext(null);
 
 export default function Root() {
   const { contacts } = useLoaderData();
-  console.log('contact', contacts);
-  //load dữ liệu ra browser
+  let authStore = useAuth();
 
 
 
@@ -37,13 +36,20 @@ export default function Root() {
 
   //kiểm tra xem đã điều hướng loading được dữ liệu lên hết chưa
   const navigation = useNavigation();
+  console.log('authStore', authStore);
+
+  const user = localStorage.getItem('user');
+
+  const logout = () => {
+    authStore.signout();
+    navigation('/login');
+  }
 
   return (
     <>
-      
       <Context.Provider value={contextValue}>
         <div id="sidebar">
-          <h1>React Router Contacts</h1>
+          <h1 onClick={() => logout()}>Logout</h1>
           <div>
             <form id="search-form" role="search">
               <input
@@ -68,12 +74,14 @@ export default function Root() {
             </Form>
           </div>
           <div className="data-res">
+            <h5>{user ? `Xin chao ${user} !` : ''}</h5>
+          </div>
+          <div className="data-res">
             <h4 style={{ color: 'blue' }}>
               <NavLink to={`data`}>
                 Click me send data
               </NavLink>
             </h4>
-
           </div>
           <nav>
             <ul>

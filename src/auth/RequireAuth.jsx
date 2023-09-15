@@ -9,7 +9,8 @@ export default function RequireAuth({ children }) {
     let auth = useAuth();
     //context api lấy ra state
     let location = useLocation();
-    if (!auth.user) {
+    const getUserStorage = localStorage.getItem('tokenUser');
+    if (!getUserStorage) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them
         // along to that page after they login, which is a nicer user experience

@@ -35,8 +35,8 @@ const RegisterAndLogin = () => {
         .then((data) => {
           console.log(data, "authData");
           // auth.signin()
-          history("/data");
-          alert('đăng nhập thành công!');
+          // history("/data");
+          alert('đăng kí thành công!');
         })
         .catch((err) => {
           alert(err.code);
@@ -47,7 +47,7 @@ const RegisterAndLogin = () => {
       signInWithEmailAndPassword(database, email, password)
         .then((data) => {
           console.log(data, "authData");
-          authStore.signin(data.user.email, navigate("/", { replace: true }));
+          authStore.signin(data, navigate("/", { replace: true }));
         })
         .catch((err) => {
           alert(err.code);

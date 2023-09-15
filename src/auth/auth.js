@@ -18,6 +18,7 @@ const fakeAuthProvider = {
 
     //set lại giá trị isAuthenticated là false
     fakeAuthProvider.isAuthenticated = false;
+    setTimeout(callback, 100); // fake async
   },
 };
 

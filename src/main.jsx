@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         element: <DataRes />
       },
       {
-        path: "data/dataDeatail/:dataId",
+        path: "data/dataDetail/:dataId",
         element: <DataEditComponent />
       }
     ],
@@ -71,11 +71,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
 );
 
 
@@ -90,7 +88,9 @@ function AuthProvider({ children }) {
 
   let signin = (newUser, callback) => {
     return fakeAuthProvider.signin(() => {
-      setUser(newUser);
+      setUser(newUser.user.email);
+      localStorage.setItem('tokenUser', newUser._tokenResponse.idToken);
+      localStorage.setItem('user', newUser.user.email);
       callback;
     });
   };
@@ -98,6 +98,7 @@ function AuthProvider({ children }) {
   let signout = (callback) => {
     return fakeAuthProvider.signout(() => {
       setUser(null);
+      localStorage.clear();
       callback;
     });
   };
