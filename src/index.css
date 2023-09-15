@@ -381,3 +381,11 @@ i {
   justify-content: center;
   width: 100%;
 }
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}

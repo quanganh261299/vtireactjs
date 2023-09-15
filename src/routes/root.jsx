@@ -5,6 +5,8 @@ import { createContact, getContacts } from "../contacts";
 import React, { useMemo } from 'react';
 import { useAuth } from '../main';
 
+import { useSelector } from "react-redux";
+
 export async function loader() {
   const contacts = await getContacts();
   return { contacts };
@@ -23,8 +25,6 @@ export const Context = React.createContext(null);
 export default function Root() {
   const { contacts } = useLoaderData();
   let authStore = useAuth();
-
-
 
   //khai báo 1 function hook
   const contextValue = useMemo(
@@ -45,12 +45,15 @@ export default function Root() {
     navigation('/login');
   }
 
+
+  const bg = useSelector((state) => state.bg.backgroundColor);
+
   return (
     <>
       <Context.Provider value={contextValue}>
         <div id="sidebar">
           <h1 onClick={() => logout()}>Logout</h1>
-          <div>
+          <div className={bg}>
             <form id="search-form" role="search">
               <input
                 id="q"

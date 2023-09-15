@@ -13,7 +13,8 @@ import { envApi } from "../../enviroment";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { updateText } from "../../couter/couterSlice"
+import { updateText } from "../../couter/couterSlice";
+import { updateBg } from "../../couter/bgSlice";
 
 
 export default function DataComponent() {
@@ -46,6 +47,16 @@ export default function DataComponent() {
     const handleUpdateStore = (e) => {
         e.preventDefault();
         dispatch(updateText(value));
+    }
+
+    const handleChangeColorSearch = (e) => {
+        e.preventDefault();
+        dispatch(updateBg('green'));
+    }
+
+    const handleChangeColorSearchOriginal = (e) => {
+        e.preventDefault();
+        dispatch(updateBg('red'));git 
     }
 
     //show item
@@ -136,6 +147,9 @@ export default function DataComponent() {
                     <input type="text" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
                     <button type="submit" onClick={(e) => handleUpdateStore(e)}>Click me!</button>
                 </form>
+
+                <button type="button" onClick={(e) => handleChangeColorSearch(e)}>Change Color</button>
+                <button type="button" onClick={(e) => handleChangeColorSearchOriginal(e)}>Change Color</button>
             </Modal>
 
             <Modal title="Cảnh báo" open={isModalOpenDelete} onOk={() => handleDeleteOk(itemDelete)} onCancel={handleDeleteCancel}>
