@@ -11,6 +11,11 @@ import { useEffect, useState } from "react";
 //enviroment
 import { envApi } from "../../enviroment";
 
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { updateText } from "../../couter/couterSlice"
+
+
 export default function DataComponent() {
     const [data, setData] = useState([]);
 
@@ -28,6 +33,20 @@ export default function DataComponent() {
     useEffect(() => {
         callApi();
     }, []);
+
+    // khai báo store và lấy dữ liệu từ store
+    // lấy ra giá trị từ store
+    const count = useSelector((state) => state.counter.name);
+    // lấy ra hành động tăng giảm store
+    const dispatch = useDispatch();
+
+    const [value, setValue] = useState('');
+
+
+    const handleUpdateStore = (e) => {
+        e.preventDefault();
+        dispatch(updateText(value));
+    }
 
     //show item
     const [itemInfor, setItemInfor] = useState(null);
@@ -112,6 +131,11 @@ export default function DataComponent() {
                 <p>Some contents...</p>
                 <p>Some contents...</p>
                 <p>Some contents...</p>
+                <p>This is state of Store: {count}</p>
+                <form>
+                    <input type="text" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
+                    <button type="submit" onClick={(e) => handleUpdateStore(e)}>Click me!</button>
+                </form>
             </Modal>
 
             <Modal title="Cảnh báo" open={isModalOpenDelete} onOk={() => handleDeleteOk(itemDelete)} onCancel={handleDeleteCancel}>

@@ -26,6 +26,10 @@ import RegisterAndLogin from './auth/RegisterAndLogin';
 import RequireAuth from './auth/RequireAuth';
 import { fakeAuthProvider } from './auth/auth';
 
+// import redux
+import store from './store'
+import { Provider } from 'react-redux'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -71,9 +75,15 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <RouterProvider router={router} />
-  </AuthProvider>
+  <React.StrictMode>
+    {/* redux */}
+    <Provider store={store}>
+      {/* context API */}
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </Provider>
+  </React.StrictMode>
 );
 
 
